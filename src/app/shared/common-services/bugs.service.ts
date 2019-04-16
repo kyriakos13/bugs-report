@@ -9,11 +9,16 @@ import { environment } from 'src/environments/environment'
 export class BugsService {
 
   getAllBugsEndpoint = environment.endpointUrl + 'bugs';
+  saveBug = environment.endpointUrl + 'bugs';
 
   constructor(private client: HttpClient) { }
 d
   getBugsList(): Observable<Array<Bug>> {
     return this.client.get<Array<Bug>>(this.getAllBugsEndpoint);
+  }
+
+  saveBugRecord(record: Bug): Observable<Bug> {
+    return this.client.post<Bug>(this.getAllBugsEndpoint, record);
   }
 }
 

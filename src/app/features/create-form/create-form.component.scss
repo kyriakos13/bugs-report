@@ -1,0 +1,7 @@
+label {
+  font-weight: bold;
+}
+
+.ng-invalid.ng-dirty:not(form), .ng-invalid:not(form).form-submitted {
+  border: solid 2px red;
+}

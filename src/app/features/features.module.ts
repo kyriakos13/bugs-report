@@ -1,19 +1,23 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FeaturesRoutingModule } from './features-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import {DataTableModule} from 'angular-6-datatable';
+import { DataTableModule } from 'angular-6-datatable';
+import { CreateFormComponent } from './create-form/create-form.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, CreateFormComponent],
   imports: [
     CommonModule,
     FeaturesRoutingModule,
-    DataTableModule
+    DataTableModule,
+    ReactiveFormsModule
   ],
   exports: [
-    DashboardComponent
+    DashboardComponent,
+    CreateFormComponent
   ]
 })
 export class FeaturesModule { }
