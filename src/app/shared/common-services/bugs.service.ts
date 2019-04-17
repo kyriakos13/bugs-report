@@ -11,7 +11,7 @@ export class BugsService {
   getAllBugsEndpoint = environment.endpointUrl + 'bugs';
 
   constructor(private client: HttpClient) { }
-d
+
   getBugsList(): Observable<Array<Bug>> {
     return this.client.get<Array<Bug>>(this.getAllBugsEndpoint);
   }
