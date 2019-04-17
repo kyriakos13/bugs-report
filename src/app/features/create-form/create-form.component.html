@@ -2,7 +2,7 @@
   <form [formGroup]="form" (submit)="formSubmit()">
     <div class="form-group">
       <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" placeholder="Enter title" formControlName="title">
+      <input class="form-control col-sm-7" id="title" placeholder="Enter title" formControlName="title">
     </div>
     <div class="form-group">
       <label for="description">Description</label>
@@ -33,7 +33,7 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Save</button>
 
   </form>
 </div>
