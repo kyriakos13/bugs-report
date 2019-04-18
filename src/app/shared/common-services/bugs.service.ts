@@ -61,8 +61,8 @@ d
     }
 
     if (userParams != null) {
-      // params = params.append('sort', userParams.orderBy);
-      params = params.append('sort', 'title,desc');
+      params = params.append('sort', userParams.sortBy +','+ userParams.orderBy);
+      // params = params.append('sort', 'title,desc');
     }
 
     return this.http.get<Bug[]>(this.getAllBugsEndpoint, { observe: 'response', params})

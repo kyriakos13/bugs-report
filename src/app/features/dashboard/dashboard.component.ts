@@ -20,18 +20,18 @@ export class PaginatedResult<T> {
 })
 export class DashboardComponent implements OnInit {
   bugsList: Array<Bug> = []
-
-  genderList = [{value: 'male', display: 'Males'}, {value: 'female', display: 'Females'}];
   userParams: any = {};
   pagination: Pagination;
 
-  // bugsList: Array<Bug> = []
 
-  constructor(private service: BugsService) { }
+  constructor(private service: BugsService) {
+    this.userParams.sortBy = 'title';
+    this.userParams.orderBy = 'desc';
+  }
 
   ngOnInit() {
     // this.fetchBugs();
-    this.loadUsers();
+    this.loadBugs();
   }
 
   fetchBugs() {
@@ -39,14 +39,24 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  loadUsers() {
+  orderBy() {
+    this.userParams.orderBy = this.orderType();
+    this.loadBugs();
+  }
+
+  orderType() {
+    return (this.userParams.orderBy && this.userParams.orderBy === "asc")
+      ? "desc"
+      : "asc";
+  }
+
+  loadBugs() {
     this.service.getBugsListByParams(0, 10, this.userParams)
       .subscribe((res: PaginatedResult<Bug[]>) => {
         this.bugsList = res.result;
         this.pagination = res.pagination;
-    }, error => {
-         console.log(error);
-    });
+      }, error => {
+        console.log(error);
+      });
   }
-
 }
