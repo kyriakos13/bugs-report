@@ -8,9 +8,7 @@ export interface Comments {
   id: string;
   reporter: string;
   description: string;
-  }
-
-
+}
 export interface Bug {
   id: string;
   title: string;
@@ -43,7 +41,7 @@ export class BugsService {
   getAllBugsEndpoint = environment.endpointUrl + 'bugs';
 
   constructor(private http: HttpClient) { }
-d
+
   getBugsList(): Observable<Array<Bug>> {
     return this.http.get<Array<Bug>>(this.getAllBugsEndpoint);
   }
