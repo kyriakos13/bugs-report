@@ -1,7 +1,6 @@
 import { BugsService } from './../../shared/common-services/bugs.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-form',
@@ -16,26 +15,24 @@ export class CreateFormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private service: BugsService, private router: Router) {
+  constructor(private service: BugsService) {}
+
+  ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       reporter: new FormControl('', Validators.required),
-      priority: new FormControl(0, Validators.required),
+      priority: new FormControl('', Validators.required),
       status: new FormControl('')
     });
-   }
-
-  ngOnInit() {
-
     this.setStatusValidator();
 
   }
 
   setStatusValidator() {
     this.form.get('reporter').valueChanges.subscribe(
-      status => {
-        if (status === 'QA'){
+      reporter => {
+        if (reporter === 'QA') {
           this.form.get('status').setValidators(Validators.required);
         }
       }

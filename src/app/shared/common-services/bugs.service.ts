@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment'
+import { environment } from 'src/environments/environment';
 import { AbstractControl } from '@angular/forms';
 
 @Injectable({
@@ -13,13 +13,15 @@ export class BugsService {
   saveBug = environment.endpointUrl + 'bugs';
 
   constructor(private client: HttpClient) { }
-d
+
   getBugsList(): Observable<Array<Bug>> {
     return this.client.get<Array<Bug>>(this.getAllBugsEndpoint);
   }
 
-  saveBugRecord(record: AbstractControl): any {
-    return this.client.post(this.getAllBugsEndpoint, JSON.stringify(record.value)).subscribe((data) => {});
+  saveBugRecord(record: AbstractControl) {
+    return this.client.post(this.getAllBugsEndpoint, record.value).subscribe((response) => {
+      console.log(response);
+    });
   }
 }
 
