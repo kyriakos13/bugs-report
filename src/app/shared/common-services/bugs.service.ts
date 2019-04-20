@@ -3,35 +3,7 @@ import { HttpClient , HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment'
 import { map } from 'rxjs/operators';
-// import { Bug } from 'src/app/shared/common-services/bugs.service';
-export interface Comments {
-  id: string;
-  reporter: string;
-  description: string;
-}
-export interface Bug {
-  id: string;
-  title: string;
-  description: string;
-  priority: string;
-  reporter: string;
-  status: string;
-  updatedAt: string;
-  createdAt: string;
-  comments: Comments;
-}
-
-export interface Pagination {
-  currentPage: number;
-  itemsPerPage: number;
-  totalItems: number;
-  totalPages: number;
-}
-
-export class PaginatedResult<T> {
-  result: T;
-  pagination: Pagination;
-}
+import { Bug, PaginatedResult } from '../../models';
 
 @Injectable({
   providedIn: 'root'
@@ -59,8 +31,7 @@ export class BugsService {
     }
 
     if (userParams != null) {
-      params = params.append('sort', userParams.sortBy +','+ userParams.orderBy);
-      // params = params.append('sort', 'title,desc');
+      params = params.append('sort', userParams.sortBy + ',' + userParams.orderBy);
     }
 
     return this.http.get<Bug[]>(this.getAllBugsEndpoint, { observe: 'response', params})
@@ -73,6 +44,6 @@ export class BugsService {
           return paginatedResult;
         })
       );
-  
+
 
       }}
