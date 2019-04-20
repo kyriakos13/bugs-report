@@ -32,6 +32,8 @@
                     <td>{{ item.reporter }}</td>
                     <td>{{ item.createdAt }}</td>
                     <td>{{ item.status }}</td>
+                    <td><button [routerLink]="['/bug', item.id]">Edit</button></td>
+
                 </tr>
             </tbody>
         </table>

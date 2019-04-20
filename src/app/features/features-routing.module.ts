@@ -4,7 +4,7 @@ import { CreateFormComponent } from './create-form/create-form.component';
 
 const routes: Routes = [
   { path: 'bug', component: CreateFormComponent },
-  { path: 'bug/:id', component: CreateFormComponent }
+  { path: 'bug/:id', component: CreateFormComponent}
 ];
 
 @NgModule({
