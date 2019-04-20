@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient , HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, ObjectUnsubscribedError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { Bug, PaginatedResult } from '../../models';
@@ -34,6 +34,16 @@ export class BugsService {
       params = params.append('page', page);
       params = params.append('size', itemsPerPage);
     }
+
+
+    Object.entries(userParams).forEach(
+      ([key, value]) => {
+        if (value != null) {
+          console.log(userParams.value);
+          params = params.append(key.toString(), userParams[key]);
+        }
+      }
+    );
 
     if (userParams != null) {
       params = params.append(

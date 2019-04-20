@@ -1,4 +1,48 @@
 <div class="container">
+  <div class="row">
+  <form [formGroup]="form" (submit)="search()" style="margin: 20px">
+    <div class="row">
+      <div class="col-3">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input class="form-control" id="title" placeholder="Search title" formControlName="title">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="priority">Priority</label>
+          <select id="priority" class="form-control" formControlName="priority">
+            <option *ngFor="let priority of priorities">
+              {{priority}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="reporter">Reporter</label>
+          <select id="reporter" class="form-control" formControlName="reporter">
+            <option *ngFor="let reporter of reporters">
+              {{reporter}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" class="form-control" formControlName="status">
+            <option *ngFor="let status of statuses">
+              {{status}}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </form>
+  <button (click)="search()" class="btn btn-success">search</button>
+  </div>
+
     <div class="col-12" style="margin-top: 5%">
         <table class="table">
             <thead class="thead-dark">
@@ -35,5 +79,9 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="row" style="float: right">
+        <button (click)="previous()" class="btn btn-success" style="margin: 10px">Previous </button>
+        <button (click)="next()" class="btn btn-success " style="margin: 10px">Next</button>
     </div>
 </div>
