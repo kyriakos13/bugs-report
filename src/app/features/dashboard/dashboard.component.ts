@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BugsService, Bug } from 'src/app/shared/common-services/bugs.service';
-
+import { BugsService } from 'src/app/shared/common-services/bugs.service';
+import { Bug } from '../../models';
 export interface Pagination {
   currentPage: 0;
   itemsPerPage: 10;
