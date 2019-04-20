@@ -1,0 +1,39 @@
+<div class="container">
+  <form [formGroup]="form" (submit)="formSubmit()">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input class="form-control col-sm-7" id="title" placeholder="Enter title" formControlName="title">
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea cols="6" rows=5 class="form-control col-sm-7" id="description" placeholder="Enter description " formControlName="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="priority">Priority</label>
+      <select id="priority" class="form-control col-sm-2" formControlName="priority">
+        <option *ngFor="let priority of priorities">
+          {{priority}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="reporter">Reporter</label>
+      <select id="reporter" class="form-control col-sm-2" formControlName="reporter">
+        <option *ngFor="let reporter of reporters">
+          {{reporter}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="status">Status</label>
+      <select id="status" class="form-control col-sm-2" formControlName="status">
+        <option *ngFor="let status of statuses">
+          {{status}}
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Save</button>
+
+  </form>
+</div>
