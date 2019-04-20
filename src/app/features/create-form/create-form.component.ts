@@ -2,7 +2,7 @@ import { BugsService } from './../../shared/common-services/bugs.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Bug } from 'src/app/models';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-form',
@@ -20,7 +20,7 @@ export class CreateFormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private service: BugsService, private route: ActivatedRoute) {}
+  constructor(private service: BugsService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -60,7 +60,17 @@ export class CreateFormComponent implements OnInit {
 
   formSubmit() {
     if (this.form.valid) {
-      this.service.saveBugRecord(this.form);
+      if (this.routeParamID) {
+        this.service.saveBugRecord(this.form, this.routeParamID).subscribe(response => {
+          console.log(response);
+          this.router.navigate(['/']);
+        });
+      } else {
+        this.service.createBugRecord(this.form).subscribe(response => {
+          console.log(response);
+          this.router.navigate(['/']);
+        });
+      }
     }
   }
 
