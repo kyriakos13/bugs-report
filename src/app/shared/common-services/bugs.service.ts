@@ -19,6 +19,10 @@ export class BugsService {
     return this.http.get<Array<Bug>>(this.getAllBugsEndpoint);
   }
 
+  getBugByID(id: string): Observable<Bug> {
+    return this.http.get<Bug>(this.saveBug + '/' + id);
+  }
+
   getBugsListByParams(
     page?,
     itemsPerPage?,
@@ -57,11 +61,11 @@ export class BugsService {
       );
   }
 
-  saveBugRecord(record: AbstractControl) {
-    return this.http
-      .post(this.getAllBugsEndpoint, record.value)
-      .subscribe(response => {
-        console.log(response);
-      });
+  createBugRecord(record: AbstractControl) {
+    return this.http.post(this.saveBug, record.value);
+  }
+
+  saveBugRecord(record: AbstractControl, id: string) {
+    return this.http.put(this.saveBug + '/' + id, record.value);
   }
 }
