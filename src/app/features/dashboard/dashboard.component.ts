@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BugsService } from 'src/app/shared/common-services/bugs.service';
 import { Bug } from '../../models';
+import { ActivatedRoute } from '@angular/router';
 export interface Pagination {
   currentPage: 0;
   itemsPerPage: 10;
@@ -24,9 +25,10 @@ export class DashboardComponent implements OnInit {
   pagination: Pagination;
 
 
-  constructor(private service: BugsService) {
+  constructor(private service: BugsService, private route: ActivatedRoute) {
     this.userParams.sortBy = 'title';
     this.userParams.orderBy = 'desc';
+
   }
 
   ngOnInit() {
