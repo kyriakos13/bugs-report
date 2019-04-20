@@ -1,6 +1,8 @@
 import { BugsService } from './../../shared/common-services/bugs.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Bug } from 'src/app/models';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-create-form',
@@ -13,9 +15,12 @@ export class CreateFormComponent implements OnInit {
   reporters: Array<string> = ['', 'QA', 'PO', 'DEV'];
   statuses: Array<string> = ['', 'Ready for test', 'Done', 'Rejected'];
 
+  bug: Bug;
+  routeParamID: string;
+
   form: FormGroup;
 
-  constructor(private service: BugsService) {}
+  constructor(private service: BugsService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -27,6 +32,20 @@ export class CreateFormComponent implements OnInit {
     });
     this.setStatusValidator();
 
+
+    this.route.params.subscribe(p => {
+      console.log(p);
+      this.routeParamID = p.id;
+      if (p.id != null) { this.fetchBugById(p.id) }
+    });
+
+  }
+
+  fetchBugById(id: string) {
+    this.service.getBugByID(id).subscribe((data: Bug) => {
+      console.log(data);
+      this.form.patchValue(data);
+    });
   }
 
   setStatusValidator() {

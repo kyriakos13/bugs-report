@@ -19,6 +19,10 @@ export class BugsService {
     return this.http.get<Array<Bug>>(this.getAllBugsEndpoint);
   }
 
+  getBugByID(id: string): Observable<Bug> {
+    return this.http.get<Bug>(this.saveBug + '/' + id);
+  }
+
   getBugsListByParams(
     page?,
     itemsPerPage?,
